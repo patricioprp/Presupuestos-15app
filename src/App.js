@@ -17,13 +17,17 @@ function App() {
   //UseEffect que actualiza el restante
     useEffect( () => {
       if(creargasto){
+        //Agrega al nuevo presupuesto
         guardarGastos([
           ...gastos,gasto
       ]);
+      //resta del presupuesto actual
+      const presupuestoRestante = restante - gasto.cantidad;
+      guardarRestante(presupuestoRestante);
       //Resetear a false
       guardarCreargasto(false);
       }
-    },[gasto]);
+    },[gasto, creargasto, gastos, restante]);
 
   return (
     <div className="container">
