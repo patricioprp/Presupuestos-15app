@@ -11,15 +11,20 @@ function App() {
   const [ restante, guardarRestante ] = useState(0);
   const [mostrarpregunta, actualizarPregunta] = useState(true);
   const [ gastos, guardarGastos ] = useState([]);
+  const [gasto, guardarGasto] = useState({});
+  const [creargasto, guardarCreargasto] = useState(false);
 
   //UseEffect que actualiza el restante
-    useEffect( () => {},[]);
-  //Cuando agreguemos un nuevo gasto
-  const agregarNuevoGasto = gasto => {
-      guardarGastos([
+    useEffect( () => {
+      if(creargasto){
+        guardarGastos([
           ...gastos,gasto
       ]);
-  }
+      //Resetear a false
+      guardarCreargasto(false);
+      }
+    },[gasto]);
+
   return (
     <div className="container">
       <header>
@@ -39,7 +44,8 @@ function App() {
           <div className="row">
           <div className="one-half column">
             <Formulario
-            agregarNuevoGasto={agregarNuevoGasto} 
+            guardarGasto={guardarGasto} 
+            guardarCreargasto={guardarCreargasto}
             />
           </div>
           <div className="one-half column">
