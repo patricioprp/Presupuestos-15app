@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import Error from "./Error";
 import shortid from "shortid";
+import PropTypes from 'prop-types';
 
 const Formulario = ({guardarGasto,guardarCreargasto}) => {
 
     const [ nombre,guardarNombre ] = useState('');
-    const [ cantidad,guardarCantidad ] = useState();
+    const [ cantidad,guardarCantidad ] = useState(0);
     const [error,guardarError] = useState(false);
     
     //cuando un suario agrega un gasto
@@ -56,7 +57,7 @@ const Formulario = ({guardarGasto,guardarCreargasto}) => {
                 className="u-full-width"
                 placeholder="300"
                 value={cantidad}
-                onChange={ e => guardarCantidad(parseInt(e.target.value,10))}
+                onChange={e => guardarCantidad( parseInt( e.target.value, 10 ) )}
                 />
             </div>
             <input 
@@ -67,5 +68,10 @@ const Formulario = ({guardarGasto,guardarCreargasto}) => {
         </form>
      );
 }
- 
+
+Formulario.propTypes ={
+    guardarGasto: PropTypes.func.isRequired,
+    guardarCreargasto: PropTypes.func.isRequired
+ }
+
 export default Formulario;
